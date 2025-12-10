@@ -9,7 +9,6 @@ class Assembler:
         self.instructions = []
 
     def parse(self, text):
-        """Разобрать JSON-программу."""
         try:
             program = json.loads(text)
         except json.JSONDecodeError as e:
@@ -21,7 +20,6 @@ class Assembler:
         self.instructions = []
 
         for i, cmd in enumerate(program):
-            # допускаем комментарии вида { "_comment": "..." }
             if isinstance(cmd, dict) and "_comment" in cmd and len(cmd) == 1:
                 continue
 
@@ -30,7 +28,6 @@ class Assembler:
         return self.instructions
 
     def parse_command(self, cmd, num):
-        """Разобрать одну команду и вернуть A, B, C."""
         if not isinstance(cmd, dict):
             raise SyntaxError(f"Команда {num}: должна быть объектом JSON")
 
@@ -62,14 +59,12 @@ class Assembler:
         raise SyntaxError(f"Команда {num}: неизвестная операция '{op}'")
 
     def get_test_output(self):
-        """Вывести внутреннее представление (режим тестирования)."""
         return "\n".join(
             f"A={i['A']} B={i['B']} C={i['C']}" for i in self.instructions
         )
 
 
 def main():
-    # python assembler.py input.json output.json [--test]
     if len(sys.argv) < 3:
         print("Использование: python assembler.py input.json output.json [--test]")
         sys.exit(1)
