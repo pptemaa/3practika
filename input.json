@@ -1,0 +1,6 @@
+[
+  { "op": "load_const", "const": 5, "addr": 100 },
+  { "op": "read_mem", "src": 10, "dst": 20 },
+  { "op": "write_mem", "src": 20, "dst": 30 },
+  { "op": "popcnt", "src": 50, "dst": 90 }
+]
